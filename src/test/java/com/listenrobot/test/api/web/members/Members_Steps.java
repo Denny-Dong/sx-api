@@ -2,6 +2,7 @@ package com.listenrobot.test.api.web.members;
 
 import org.junit.Test;
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class Members_Steps extends Members_Hooks {
 
@@ -13,7 +14,7 @@ public class Members_Steps extends Members_Hooks {
     }
     @Test
     public void members_get(){
-        given().when().get("/members").then().assertThat().statusCode(200);
+        given().when().get("/members").then().assertThat().statusCode(200).body(matchesJsonSchemaInClasspath("jsonResources\\schema\\web\\member\\members_get.json"));
 
 
     }

@@ -44,10 +44,19 @@ public class APIDriver {
     public void switchToAppUrlWithAuthentication(String stringToken) {
         RestAssured.reset();
         RestAssured.baseURI = config.get("restful.base.url.app");
-        // RestAssured.useRelaxedHTTPSValidation();
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
         RestAssured.requestSpecification = new RequestSpecBuilder().setContentType(ContentType.JSON)
                 .addHeader("Authorization", stringToken).build();
+        RestAssured.responseSpecification = new ResponseSpecBuilder()
+                .expectResponseTime(lessThan(responseTimelimit), TimeUnit.SECONDS).build();
+    }
+
+    public void switchToAppUrlWithCookie(Map<String,Object> cookieMap) {
+        RestAssured.reset();
+        RestAssured.baseURI = config.get("restful.base.url.app");
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+        RestAssured.requestSpecification = new RequestSpecBuilder().setContentType(ContentType.JSON)
+                .addCookies(cookieMap).build();
         RestAssured.responseSpecification = new ResponseSpecBuilder()
                 .expectResponseTime(lessThan(responseTimelimit), TimeUnit.SECONDS).build();
     }

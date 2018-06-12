@@ -41,12 +41,12 @@ public class APIDriver {
                 .expectResponseTime(lessThan(responseTimelimit), TimeUnit.SECONDS).build();
     }
 
-    public void switchToAppUrlWithAuthentication(String stringToken) {
+    public void switchToAppUrlWithAuthentication(String stringToken,Map<String,String> cookie) {
         RestAssured.reset();
         RestAssured.baseURI = config.get("restful.base.url.app");
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
         RestAssured.requestSpecification = new RequestSpecBuilder().setContentType(ContentType.JSON)
-                .addHeader("Authorization", stringToken).build();
+                .addHeader("Authorization", stringToken).addCookies(cookie).build();
         RestAssured.responseSpecification = new ResponseSpecBuilder()
                 .expectResponseTime(lessThan(responseTimelimit), TimeUnit.SECONDS).build();
     }

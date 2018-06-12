@@ -14,12 +14,13 @@ public class Members_Hooks {
     public static void setUpBeforeClass() throws Exception {
         driver.createNewDriverInstance();
         userAccount = new UserAccount();
-        driver.switchToAppUrlWithCookie(userAccount.getCookieMap());
+        driver.switchToAppUrlWithAuthentication(userAccount.getTooken(),userAccount.getCookieMap());
     }
 
     @AfterClass
     public static void tearDownAfterClass() {
     }
+
 
     @Before
     public void setUp() throws Throwable {

@@ -14,7 +14,7 @@ public class Members_Steps extends Members_Hooks {
     }
     @Test
     public void members_get(){
-        given().when().get("/members").then().assertThat().statusCode(200).body(matchesJsonSchemaInClasspath("jsonResources\\schema\\web\\member\\members_get.json"));
+        given().when().get("/user").then().assertThat().statusCode(200).body(matchesJsonSchemaInClasspath("jsonResources\\schema\\web\\member\\members_get.json"));
 
 
     }
